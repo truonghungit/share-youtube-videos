@@ -2,10 +2,11 @@ import legacy from '@vitejs/plugin-legacy';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 import { fileURLToPath } from 'url';
 import { defineConfig } from 'vite';
+import macrosPlugin from 'vite-plugin-babel-macros';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [legacy(), reactRefresh()],
+  plugins: [legacy(), reactRefresh(), macrosPlugin()],
   esbuild: {
     jsxInject: `import React from 'react'`, // automatically import React in jsx files
   },

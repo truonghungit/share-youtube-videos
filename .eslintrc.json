@@ -55,6 +55,7 @@
         "reservedFirst": true,
         "noSortAlphabetically": true
       }
-    ]
+    ],
+    "react/display-name": ["off"]
   }
 }
