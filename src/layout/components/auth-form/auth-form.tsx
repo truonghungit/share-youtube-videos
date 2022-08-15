@@ -10,10 +10,11 @@ const shareVideoValidationSchema = Yup.object().shape({
 });
 
 type AuthFormProps = {
+  isLoading?: boolean;
   onSubmit: (email: string, password: string) => void;
 };
 
-export const AuthForm = ({ onSubmit }: AuthFormProps) => {
+export const AuthForm = ({ onSubmit, isLoading }: AuthFormProps) => {
   const form = useFormik({
     initialValues: { email: '', password: '' },
     validationSchema: shareVideoValidationSchema,
@@ -47,7 +48,7 @@ export const AuthForm = ({ onSubmit }: AuthFormProps) => {
           onChange={form.handleChange}
         />
       </div>
-      <Button variant='primary' type='submit' className='w-full'>
+      <Button variant='primary' type='submit' className='w-full' isLoading={isLoading}>
         Login / Register
       </Button>
     </form>

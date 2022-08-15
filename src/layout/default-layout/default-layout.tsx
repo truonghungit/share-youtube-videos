@@ -9,7 +9,6 @@ import {
 } from 'react-firebase-hooks/auth';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
-// import { useAuth, UserCredential } from '@/core/auth';
 import { auth } from '@/core/firebase';
 import { Button } from '@/ui-components/button';
 
@@ -21,13 +20,13 @@ export default function DefaultLayout() {
   const [loginUser, setLoginUser] = useState<{ email: string; password: string }>(null!);
 
   const [loginWithEmailPassword, _user, loadingLogin, loginError] = useSignInWithEmailAndPassword(auth);
-  const [createUser, createdUser, loadingCrateUser] = useCreateUserWithEmailAndPassword(auth);
+  const [createUser, createdUser, loadingCreateUser] = useCreateUserWithEmailAndPassword(auth);
 
   useEffect(() => {
-    if (loginError?.code === 'auth/user-not-found' && !createdUser && !user && !loadingCrateUser) {
+    if (loginError?.code === 'auth/user-not-found' && !createdUser && !user && !loadingCreateUser) {
       createUser(loginUser.email, loginUser.password);
     }
-  }, [loginError, createUser, loginUser, createdUser, user, loadingCrateUser]);
+  }, [loginError, createUser, loginUser, createdUser, user, loadingCreateUser]);
 
   const login = (email: string, password: string) => {
     loginWithEmailPassword(email, password);
@@ -84,7 +83,7 @@ export default function DefaultLayout() {
                       </Button>
                     </div>
                   ) : (
-                    <AuthForm onSubmit={login} />
+                    <AuthForm isLoading={loadingLogin || loadingCreateUser || authLoading} onSubmit={login} />
                   )}
                 </>
               )}
@@ -134,7 +133,7 @@ export default function DefaultLayout() {
                           </Link>
                         </div>
                       ) : (
-                        <AuthForm onSubmit={login} />
+                        <AuthForm isLoading={loadingLogin || loadingCreateUser || authLoading} onSubmit={login} />
                       )}
                     </>
                   )}

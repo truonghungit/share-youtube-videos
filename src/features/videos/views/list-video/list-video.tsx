@@ -39,7 +39,7 @@ export default function ListVideo() {
             <div className='max-w-lg mx-auto'>
               <img src='/images/empty.svg' alt='Empty data' />
               <div className='mt-6 text-center text-2xl text-gray-800'>
-                No videos here, Lets share your interesting videos t o people
+                No videos here, Lets share your interesting videos to people
               </div>
             </div>
           )}
