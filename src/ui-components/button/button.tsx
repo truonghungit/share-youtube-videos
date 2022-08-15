@@ -29,8 +29,9 @@ const primaryStyles = tw`
 
 const secondaryStyles = tw`
   bg-white
-  border border-2 border-gray-400 
-  hover:bg-gray-100
+  border border-gray-300 rounded-md shadow-sm
+  text-gray-700 
+  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
 `;
 
 const getVariantStyle = (variant: ButtonVariants) => {
