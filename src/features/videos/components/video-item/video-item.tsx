@@ -9,11 +9,11 @@ export type VideoProps = {
 
 export const VideoItem = ({ video }: VideoProps) => {
   return (
-    <div className='flex gap-6 h-60'>
-      <div className='w-5/12 flex-shrink-0'>
+    <div className='flex flex-col lg:flex-row gap-6 lg:h-60'>
+      <div className='w-full h-48 lg:h-auto lg:w-5/12 lg:flex-shrink-0'>
         <EmbedVideo videoId={video.id} title={video.title || 'YouTube video player'} />
       </div>
-      <div className='flex-grow'>
+      <div className='lg:flex-grow'>
         <h3 className='text-gray-900 text-xl font-medium mb-2 line-clamp-1'>{video.title}</h3>
         <div className='font-semibold'>
           Shared by: <span>{video.sharedBy}</span>

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
 
 import { firebaseApp } from '@/core/firebase';
-import { Loading } from '@/ui-components/loading/loading';
+import { Loading } from '@/ui-components/loading';
 
 import { VideoItem } from '../../components/video-item/video-item';
 import { MOVIES_COLLECTION_NAME } from '../../constant';
