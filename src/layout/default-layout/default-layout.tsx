@@ -1,13 +1,12 @@
-import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
+import { useAuth } from '@/core/auth';
 import { Button } from '@/ui-components/button';
 
 import { AuthForm } from '../components/auth-form/auth-form';
 
 export default function DefaultLayout() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loggedInUser] = useState({ email: 'someone@gmail.com' });
+  const { loggedInUser, isAuthenticated, login, logout } = useAuth();
 
   return (
     <>
@@ -37,20 +36,21 @@ export default function DefaultLayout() {
               {isAuthenticated ? (
                 <div className='flex items-center gap-3'>
                   <span>Welcome {loggedInUser.email}</span>
-                  <Button variant='primary'>Share a movie</Button>
-                  <Button variant='secondary' onClick={() => setIsAuthenticated(false)}>
+                  <Link to='/share-movie'>
+                    <Button variant='primary'>Share a movie</Button>
+                  </Link>
+                  <Button variant='secondary' onClick={() => logout()}>
                     Logout
                   </Button>
                 </div>
               ) : (
-                <AuthForm onSubmit={() => setIsAuthenticated(true)} />
+                <AuthForm onSubmit={login} />
               )}
             </div>
           </div>
         </header>
 
         <main className='max-w-7xl mx-auto px-4 py-6'>
-          Main content
           <Outlet />
         </main>
       </div>
