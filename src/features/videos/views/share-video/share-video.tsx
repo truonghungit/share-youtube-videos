@@ -110,7 +110,7 @@ export default function ShareVideo() {
       <form className='mt-10' onSubmit={form.handleSubmit}>
         <fieldset className='border border-solid border-gray-300 rounded px-6 py-10'>
           <legend className='font-medium'>Share a Youtube movie</legend>
-          <div className='flex gap-4'>
+          <div className='flex flex-col md:flex-row gap-4'>
             <label htmlFor='url' className='flex-shrink-0 mt-2 min-w-fit'>
               Youtube URL:
             </label>

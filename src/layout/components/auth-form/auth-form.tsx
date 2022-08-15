@@ -23,8 +23,8 @@ export const AuthForm = ({ onSubmit }: AuthFormProps) => {
   });
 
   return (
-    <form className='flex items-center gap-3' onSubmit={form.handleSubmit}>
-      <div>
+    <form className='flex flex-col md:flex-row items-center gap-3' onSubmit={form.handleSubmit}>
+      <div className='w-full'>
         <Input
           name='email'
           placeholder='Email'
@@ -36,7 +36,7 @@ export const AuthForm = ({ onSubmit }: AuthFormProps) => {
           onChange={form.handleChange}
         />
       </div>
-      <div>
+      <div className='w-full'>
         <Input
           name='password'
           placeholder='Password'
@@ -47,7 +47,7 @@ export const AuthForm = ({ onSubmit }: AuthFormProps) => {
           onChange={form.handleChange}
         />
       </div>
-      <Button variant='primary' type='submit'>
+      <Button variant='primary' type='submit' className='w-full'>
         Login / Register
       </Button>
     </form>

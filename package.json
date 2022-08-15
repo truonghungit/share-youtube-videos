@@ -31,6 +31,7 @@
     }
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
     "@heroicons/react": "^1.0.6",
     "firebase": "^9.9.2",
     "formik": "^2.2.9",
