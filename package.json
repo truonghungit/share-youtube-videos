@@ -32,9 +32,11 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
+    "firebase": "^9.9.2",
     "formik": "^2.2.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-firebase-hooks": "^5.0.3",
     "react-router-dom": "6",
     "styled-components": "^5.3.5",
     "yup": "^0.32.11"
@@ -45,6 +47,7 @@
     "@commitlint/cz-commitlint": "^15.0.0",
     "@cypress/vite-dev-server": "^2.2.2",
     "@tailwindcss/forms": "^0.5.1",
+    "@tailwindcss/line-clamp": "^0.4.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",

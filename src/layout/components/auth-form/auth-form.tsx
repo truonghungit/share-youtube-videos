@@ -1,7 +1,6 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import { UserCredential } from '@/core/auth';
 import { Button } from '@/ui-components/button';
 import { Input } from '@/ui-components/input';
 
@@ -11,7 +10,7 @@ const shareVideoValidationSchema = Yup.object().shape({
 });
 
 type AuthFormProps = {
-  onSubmit: (credential: UserCredential) => void;
+  onSubmit: (email: string, password: string) => void;
 };
 
 export const AuthForm = ({ onSubmit }: AuthFormProps) => {
@@ -19,7 +18,7 @@ export const AuthForm = ({ onSubmit }: AuthFormProps) => {
     initialValues: { email: '', password: '' },
     validationSchema: shareVideoValidationSchema,
     onSubmit: values => {
-      onSubmit && onSubmit(values);
+      onSubmit && onSubmit(values.email, values.password);
     },
   });
 

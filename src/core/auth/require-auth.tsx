@@ -1,13 +1,17 @@
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router-dom';
 
-import { useAuth } from './auth';
+import { auth } from '../firebase';
+import { SplashScreen } from '../splash-screen';
 
 export const RequireAuth = ({ children }: { children: JSX.Element }) => {
-  const auth = useAuth();
+  const [user, authLoading] = useAuthState(auth);
 
-  console.log('auth', auth);
+  if (authLoading) {
+    return <SplashScreen />;
+  }
 
-  if (!auth.isAuthenticated) {
+  if (!user) {
     return <Navigate replace to='/' />;
   }
 

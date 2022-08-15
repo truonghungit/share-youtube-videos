@@ -1,12 +1,41 @@
-import { Link, Outlet } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import { useEffect, useState } from 'react';
+import {
+  useAuthState,
+  useCreateUserWithEmailAndPassword,
+  useSignInWithEmailAndPassword,
+} from 'react-firebase-hooks/auth';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
-import { useAuth } from '@/core/auth';
+// import { useAuth, UserCredential } from '@/core/auth';
+import { auth } from '@/core/firebase';
 import { Button } from '@/ui-components/button';
 
 import { AuthForm } from '../components/auth-form/auth-form';
 
 export default function DefaultLayout() {
-  const { loggedInUser, isAuthenticated, login, logout } = useAuth();
+  const navigate = useNavigate();
+  const [user, authLoading] = useAuthState(auth);
+  const [loginUser, setLoginUser] = useState<{ email: string; password: string }>(null!);
+
+  const [loginWithEmailPassword, _user, loadingLogin, loginError] = useSignInWithEmailAndPassword(auth);
+  const [createUser, createdUser, loadingCrateUser, crateUserError] = useCreateUserWithEmailAndPassword(auth);
+
+  useEffect(() => {
+    if (loginError?.code === 'auth/user-not-found' && !createdUser && !user && !loadingCrateUser) {
+      createUser(loginUser.email, loginUser.password);
+    }
+  }, [loginError, createUser, loginUser, createdUser, user, loadingCrateUser]);
+
+  const login = (email: string, password: string) => {
+    loginWithEmailPassword(email, password);
+    setLoginUser({ email, password });
+  };
+
+  const logout = () => {
+    signOut(auth);
+    navigate('/');
+  };
 
   return (
     <>
@@ -33,18 +62,22 @@ export default function DefaultLayout() {
             </div>
 
             <div className='hidden md:flex items-center justify-end md:flex-1 lg:w-0'>
-              {isAuthenticated ? (
-                <div className='flex items-center gap-3'>
-                  <span>Welcome {loggedInUser.email}</span>
-                  <Link to='/share-movie'>
-                    <Button variant='primary'>Share a movie</Button>
-                  </Link>
-                  <Button variant='secondary' onClick={() => logout()}>
-                    Logout
-                  </Button>
-                </div>
-              ) : (
-                <AuthForm onSubmit={login} />
+              {!authLoading && (
+                <>
+                  {user ? (
+                    <div className='flex items-center gap-3'>
+                      <span>Welcome {user.email}</span>
+                      <Link to='/share-movie'>
+                        <Button variant='primary'>Share a movie</Button>
+                      </Link>
+                      <Button variant='secondary' onClick={() => logout()}>
+                        Logout
+                      </Button>
+                    </div>
+                  ) : (
+                    <AuthForm onSubmit={login} />
+                  )}
+                </>
               )}
             </div>
           </div>

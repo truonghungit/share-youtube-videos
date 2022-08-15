@@ -4,3 +4,5 @@ export const YOUTUBE_VIDEO_URL_REGEX =
 export const YOUTUBE_DATA_API_URL = 'https://www.googleapis.com/youtube/v3/videos';
 export const YOUTUBE_DATA_API_KEY = 'AIzaSyBExcN-vhvB4lDLDBXXA09UhwOvHpq0vpE';
 export const ID_CHARACTER_COUNT = 11;
+
+export const MOVIES_COLLECTION_NAME = 'movies';
