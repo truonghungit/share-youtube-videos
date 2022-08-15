@@ -4,7 +4,7 @@ import { useRoutes } from 'react-router-dom';
 import { ErrorBoundary, ErrorFallback } from '@/core/error';
 import { SplashScreen } from '@/core/splash-screen';
 
-import { AuthProvider } from './core/auth';
+// import { AuthProvider } from './core/auth';
 import appRoutes from './routes';
 
 export default function App() {
@@ -12,9 +12,7 @@ export default function App() {
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <AuthProvider>
-        <Suspense fallback={<SplashScreen />}>{routes}</Suspense>
-      </AuthProvider>
+      <Suspense fallback={<SplashScreen />}>{routes}</Suspense>
     </ErrorBoundary>
   );
 }
